@@ -3,13 +3,13 @@ lock "3.8.0"
 
 set :application, "intro_rails"
 set :repo_url, "git@github.com:axelroy/rails-intro.git"
-set :branch, "the-end"
 
 # Default branch is :master
+set :branch, "the-end"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
+set :deploy_to, "/home/axel/www/rails-intro/"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -40,4 +40,9 @@ namespace :deploy do
             execute :sudo,  'service nginx reload'
         end
     end
+end
+
+prefix = "set -a; ~/.envfile; set +a;"
+[:bundle, :rake, :rails].each do |cmd|
+    SSHKit.config.command_map.prefix[cmd].push(prefix)
 end
