@@ -43,6 +43,6 @@ namespace :deploy do
 end
 
 prefix = "set -a; ~/.envfile; set +a;"
-[:bundler, :rake, :rails].each do |cmd|
+[:bundle, :rake, :rails].each do |cmd|
     SSHKit.config.command_map.prefix[cmd].push(prefix)
 end
